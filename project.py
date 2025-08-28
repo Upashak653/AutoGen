@@ -34,7 +34,6 @@ def build_team(model: str = "gpt-4o-mini") -> RoundRobinGroupChat:
     """Create and return a three‑agent *RoundRobinGroupChat* team."""
     key = os.getenv('OPENAI_API_KEY')
     llm_client = OpenAIChatCompletionClient(model=model,api_key=key)
-    # Agent that **only** calls the arXiv tool and forwards top‑N papers
 
     user_agent = UserProxyAgent(
     name="UserProxy",
@@ -57,7 +56,6 @@ def build_team(model: str = "gpt-4o-mini") -> RoundRobinGroupChat:
         reflect_on_tool_use=True,
     )
 
-    # Agent that writes the final literature review
     financial_agent = AssistantAgent(
         name="financial_agent",
         description="Produces a short Markdown review from provided papers.",
@@ -110,3 +108,4 @@ if __name__ == "__main__":
             print(line)
 
     asyncio.run(_demo()) 
+
